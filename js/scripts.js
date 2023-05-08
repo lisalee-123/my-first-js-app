@@ -36,10 +36,17 @@ let pokemonRepository = (function () {
   }
 
   function add(pokemon) {
-    if (typeof pokemon === "object") {
+    if (
+      typeof pokemon === "object" &&
+      Object.keys(pokemon).includes("name") &&
+      Object.keys(pokemon).includes("height") &&
+      Object.keys(pokemon).includes("types")
+    ) {
       pokemonList.push(pokemon);
     } else {
-      console.log("Error: only objects can be added");
+      console.log(
+        "Error: only objects can be added that have name, height & type properties can be added to the Repository"
+      );
     }
   }
 
@@ -81,4 +88,15 @@ pokemonRepository.add({
   types: ["New Type"],
 });
 
+pokemonRepository.add(10); //Error Message, because a number got passed instead of an Object
+pokemonRepository.add("String-Pokemon"); //Error Message because a string got passed
+
 printArrayDetails(pokemonRepository.getAll());
+
+pokemonRepository.add({
+  firstName: "New Pokemon",
+  size: 100,
+  types: ["New Type"],
+});
+
+filterPokemon(Bulbasaur);
