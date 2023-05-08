@@ -34,9 +34,15 @@ let pokemonRepository = (function () {
   function getAll() {
     return pokemonList;
   }
-  function add() {
-    pokemonList.push(pokemon);
+
+  function add(pokemon) {
+    if (typeof pokemon === "object") {
+      pokemonList.push(pokemon);
+    } else {
+      console.log("Error: only objects can be added");
+    }
   }
+
   return {
     getAll: getAll,
     add: add,
@@ -46,8 +52,10 @@ let pokemonRepository = (function () {
 console.log(pokemonRepository.getAll());
 
 document.write("<div><h1> Pokemon </h1></div>");
+//FOREACH() instead of FOR LOOP
 
 function printArrayDetails(list) {
+  //list = Array of Objects to be displayed
   list.forEach(function (pokemon) {
     //pokemon argument replaces the list[i]
     document.write(
@@ -65,4 +73,12 @@ function printArrayDetails(list) {
   });
 }
 
-printArrayDetails(pokemonRepository.getAll()); // list in the function becomes the argument I put in
+printArrayDetails(pokemonRepository.getAll());
+
+pokemonRepository.add({
+  name: "New Pokemon",
+  height: 100,
+  types: ["New Type"],
+});
+
+printArrayDetails(pokemonRepository.getAll());
