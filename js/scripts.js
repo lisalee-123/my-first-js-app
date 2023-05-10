@@ -50,9 +50,23 @@ let pokemonRepository = (function () {
     }
   }
 
+  function addListItem(pokemon) {
+    let ul = document.querySelector("ul");
+
+    pokemonRepository.getAll().forEach(function (pokemon) {
+      let listItem = document.createElement("li");
+      let button = document.createElement("button");
+      button.innerText = pokemon.name;
+      button.classList.add("button");
+      listItem.appendChild(button);
+      ul.appendChild(listItem);
+    });
+  }
+
   return {
     getAll: getAll,
     add: add,
+    addListItem: addListItem,
   };
 })();
 
@@ -73,6 +87,7 @@ function printArrayDetails(list) {
     button.classList.add("selected");
     listItem.appendChild(button);
     ul.appendChild(listItem);
+    addListItem(pokemon);
   });
 }
 
@@ -94,5 +109,3 @@ pokemonRepository.add({
   size: 100,
   types: ["New Type"],
 });
-
-filterPokemon(Bulbasaur);

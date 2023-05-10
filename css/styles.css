@@ -47,7 +47,7 @@ ul {
   list-style: none;
 }
 
-.selected {
+.button {
   background-color: var(--blue);
   border: none;
   color: white;
