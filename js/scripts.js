@@ -62,21 +62,17 @@ document.write("<div><h1> Pokemon </h1></div>");
 //FOREACH() instead of FOR LOOP
 
 function printArrayDetails(list) {
+  let ul = document.querySelector("ul");
+
   //list = Array of Objects to be displayed
   list.forEach(function (pokemon) {
     //pokemon argument replaces the list[i]
-    document.write(
-      "<div class='pokemonList_Item'><p>" +
-        pokemon.name +
-        " (height: " +
-        pokemon.height +
-        "m) </p></div>"
-    );
-    if (pokemon.height > 0.6) {
-      document.write(
-        "<div class='pokemonList_Item'><p> - Wow, that's big! </p></div>"
-      );
-    }
+    let listItem = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("selected");
+    listItem.appendChild(button);
+    ul.appendChild(listItem);
   });
 }
 

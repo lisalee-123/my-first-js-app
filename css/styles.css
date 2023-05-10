@@ -42,3 +42,14 @@ div {
 .pokemonList_item {
   display: flex;
 }
+
+ul {
+  list-style: none;
+}
+
+.selected {
+  background-color: var(--blue);
+  border: none;
+  color: white;
+  width: 150px;
+}
