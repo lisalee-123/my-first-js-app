@@ -52,15 +52,12 @@ let pokemonRepository = (function () {
 
   function addListItem(pokemon) {
     let ul = document.querySelector("ul");
-
-    pokemonRepository.getAll().forEach(function (pokemon) {
-      let listItem = document.createElement("li");
-      let button = document.createElement("button");
-      button.innerText = pokemon.name;
-      button.classList.add("button");
-      listItem.appendChild(button);
-      ul.appendChild(listItem);
-    });
+    let listItem = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("button");
+    listItem.appendChild(button);
+    ul.appendChild(listItem);
   }
 
   return {
@@ -72,40 +69,28 @@ let pokemonRepository = (function () {
 
 console.log(pokemonRepository.getAll());
 
-document.write("<div><h1> Pokemon </h1></div>");
-//FOREACH() instead of FOR LOOP
-
-function printArrayDetails(list) {
-  let ul = document.querySelector("ul");
-
-  //list = Array of Objects to be displayed
-  list.forEach(function (pokemon) {
-    //pokemon argument replaces the list[i]
-    let listItem = document.createElement("li");
-    let button = document.createElement("button");
-    button.innerText = pokemon.name;
-    button.classList.add("selected");
-    listItem.appendChild(button);
-    ul.appendChild(listItem);
-    addListItem(pokemon);
-  });
-}
-
-printArrayDetails(pokemonRepository.getAll());
-
 pokemonRepository.add({
   name: "New Pokemon",
   height: 100,
   types: ["New Type"],
 });
 
+console.log(pokemonRepository.getAll());
+
+//FOREACH() LOOP
+
+pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.addListItem(pokemon);
+});
+
+//OLD FUNCTION THAT WORKS
+/*function printArrayDetails(pokemons) {
+  pokemons.forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
+}
+
 pokemonRepository.add(10); //Error Message, because a number got passed instead of an Object
 pokemonRepository.add("String-Pokemon"); //Error Message because a string got passed
 
-printArrayDetails(pokemonRepository.getAll());
-
-pokemonRepository.add({
-  firstName: "New Pokemon",
-  size: 100,
-  types: ["New Type"],
-});
+printArrayDetails(pokemonRepository.getAll()); */

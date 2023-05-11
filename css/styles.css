@@ -48,8 +48,11 @@ ul {
 }
 
 .button {
-  background-color: var(--blue);
-  border: none;
-  color: white;
+  font-size: 16px;
+  border-style: solid 2px;
+  border-color: var(--blue);
+  color: var(--blue);
   width: 150px;
+  height: 50px;
+  margin: 5px;
 }
