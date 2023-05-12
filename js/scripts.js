@@ -6,6 +6,17 @@ let pokemonRepository = (function () {
     return pokemonList;
   }
 
+  function showLoadingMessage() {
+    let loadingMessage = document.createElement("p");
+    loadingMessage.textContent = "Deatils loading...";
+    document.body.appendChild(loadingMessage);
+  }
+
+  function hideLoadingMessage() {
+    let loadingMessage = document.querySelector("p");
+    document.body.removeChild(loadingMessage);
+  }
+
   function add(pokemon) {
     if (
       typeof pokemon === "object" &&
@@ -22,12 +33,14 @@ let pokemonRepository = (function () {
   }
 
   function loadList() {
+    showLoadingMessage();
     //fetch-function, apiURL is the promise, the jsonlist is the response
     return fetch(apiUrl)
       .then(function (response) {
         return response.json();
       })
       .then(function (json) {
+        hideLoadingMessage();
         //convert the json list into our objects
         json.results.forEach(function (item) {
           let pokemon = {
@@ -38,23 +51,27 @@ let pokemonRepository = (function () {
         });
       })
       .catch(function (e) {
+        hideLoadingMessage();
         console.error(e);
       });
   }
 
   function loadDetails(item) {
+    showLoadingMessage();
     let url = item.detailsUrl;
     return fetch(url)
       .then(function (response) {
         return response.json();
       })
       .then(function (details) {
+        hideLoadingMessage();
         // Now we add the details to the item
         item.imageUrl = details.sprites.front_default;
         item.height = details.height;
         item.types = details.types;
       })
       .catch(function (e) {
+        hideLoadingMessage();
         console.error(e);
       });
   }
@@ -85,6 +102,8 @@ let pokemonRepository = (function () {
     showDetails: showDetails,
     loadList: loadList,
     loadDetails: loadDetails,
+    showLoadingMessage: showLoadingMessage,
+    hideLoadingMessage: hideLoadingMessage,
   };
 })();
 
