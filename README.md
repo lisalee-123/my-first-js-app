@@ -9,16 +9,16 @@ Visual Studio Code
 ## Installation Instructions
 To install this project, follow these steps:
 
-Clone this repository to your local machine
-Install Node.js (if not already installed)
-Open the project in Visual Studio Code
-Run npm install to install dependencies
-Usage Instructions
+1. Clone this repository to your local machine
+2. Install Node.js (if not already installed)
+3. Open the project in Visual Studio Code
+4. Run npm install to install dependencies
+
+## Usage Instructions
 To run this project, follow these steps:
 
-Open the project in Visual Studio Code
-Run npm start in the terminal to start the application
-Follow the prompts to complete the exercises and tasks
+1. Open the project in Visual Studio Code
+2. Run npm start in the terminal to start the application
 
 ## Learning Objectives
 The main objective of this project is to learn the fundamentals of JavaScript, including data types, variables & functions. I hope to gain a solid understanding of the basics, which will enable me to build more complex applications in the future.
