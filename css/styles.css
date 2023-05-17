@@ -67,7 +67,7 @@ ul {
   margin: 25px;
 }
 
-/* MODAL CSS */
+/* MODAL */
 #modal-container {
   display: none;
 }
@@ -95,17 +95,28 @@ ul {
 
 .modal {
   margin: auto;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   background: #fff;
-  padding: 15px;
-  width: 100%;
+  padding: 30px;
+  border-radius: 10px;
+  width: 30%;
   max-width: 700px;
-  text-align: left;
+}
+
+.modal h1,
+.modal p {
+  display: flex;
+}
+.image {
+  height: 180px;
+  width: 180px;
 }
 
 .modal-close {
   float: right;
+  text-align: right;
   border: 0;
   background: none;
   color: #777;
