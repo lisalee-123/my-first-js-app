@@ -78,7 +78,7 @@ let pokemonRepository = (function () {
 
   function showDetails(pokemon) {
     loadDetails(pokemon).then(function () {
-      console.log(pokemon);
+      showModal(pokemon);
     });
   }
 
@@ -88,14 +88,14 @@ let pokemonRepository = (function () {
     let button = document.createElement("button");
     (button.innerText = pokemon.name),
       button.addEventListener("click", function () {
-        showModal(pokemon.name, pokemon.height, pokemon.types);
+        showDetails(pokemon);
       });
     button.classList.add("button");
     listItem.appendChild(button);
     ul.appendChild(listItem);
   }
 
-  function showModal(pokemon, height, types) {
+  function showModal(pokemon) {
     let modalContainer = document.querySelector("#modal-container");
     modalContainer.innerHTML = " ";
 
@@ -107,13 +107,13 @@ let pokemonRepository = (function () {
     closeButtonElement.innerText = "Close";
 
     let titleElement = document.createElement("h1");
-    titleElement.innerText = pokemon;
+    titleElement.innerText = pokemon.name;
 
     let contentElement1 = document.createElement("p");
-    contentElement1.innerText = height;
+    contentElement1.innerText = "Height: " + pokemon.height;
 
     let contentElement2 = document.createElement("p");
-    contentElement2.innerText = types;
+    contentElement2.innerText = "Types: " + pokemon.types.join(",");
 
     modal.appendChild(closeButtonElement);
     modal.appendChild(titleElement);
