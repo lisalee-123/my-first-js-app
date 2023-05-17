@@ -8,7 +8,7 @@ let pokemonRepository = (function () {
 
   function showLoadingMessage() {
     let loadingMessage = document.createElement("p");
-    loadingMessage.textContent = "Deatils loading...";
+    loadingMessage.textContent = "Details loading...";
     document.body.appendChild(loadingMessage);
   }
 
@@ -88,11 +88,40 @@ let pokemonRepository = (function () {
     let button = document.createElement("button");
     (button.innerText = pokemon.name),
       button.addEventListener("click", function () {
-        showDetails(pokemon);
+        showModal(pokemon.name, pokemon.height, pokemon.types);
       });
     button.classList.add("button");
     listItem.appendChild(button);
     ul.appendChild(listItem);
+  }
+
+  function showModal(pokemon, height, types) {
+    let modalContainer = document.querySelector("#modal-container");
+    modalContainer.innerHTML = " ";
+
+    let modal = document.createElement("div");
+    modal.classList.add("modal");
+    // MODAL CONTENT
+    let closeButtonElement = document.createElement("button");
+    closeButtonElement.classList.add("modal-close");
+    closeButtonElement.innerText = "Close";
+
+    let titleElement = document.createElement("h1");
+    titleElement.innerText = pokemon;
+
+    let contentElement1 = document.createElement("p");
+    contentElement1.innerText = height;
+
+    let contentElement2 = document.createElement("p");
+    contentElement2.innerText = types;
+
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(titleElement);
+    modal.appendChild(contentElement1);
+    modal.appendChild(contentElement2);
+    modalContainer.appendChild(modal);
+
+    modalContainer.classList.add("is-visible");
   }
 
   return {
@@ -104,6 +133,7 @@ let pokemonRepository = (function () {
     loadDetails: loadDetails,
     showLoadingMessage: showLoadingMessage,
     hideLoadingMessage: hideLoadingMessage,
+    showModal: showModal,
   };
 })();
 
