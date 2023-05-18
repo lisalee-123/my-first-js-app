@@ -82,11 +82,15 @@ let pokemonRepository = (function () {
     });
   }
 
+  function capitalizeFirstLetter(pokemon) {
+    return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+  }
+
   function addListItem(pokemon) {
     let ul = document.querySelector("ul");
     let listItem = document.createElement("li");
     let button = document.createElement("button");
-    (button.innerText = pokemon.name),
+    (button.innerText = capitalizeFirstLetter(pokemon)),
       button.addEventListener("click", function () {
         showDetails(pokemon);
       });
@@ -110,7 +114,7 @@ let pokemonRepository = (function () {
     // MODAL CONTENT
     let closeButtonElement = document.createElement("button");
     closeButtonElement.classList.add("modal-close");
-    closeButtonElement.innerText = "Close";
+    closeButtonElement.innerText = "X";
     closeButtonElement.addEventListener("click", hideModal);
 
     let imgElement = document.createElement("img");
@@ -119,9 +123,11 @@ let pokemonRepository = (function () {
     imgElement.alt = pokemon.name;
 
     let titleElement = document.createElement("h1");
-    titleElement.innerText = pokemon.name;
+    titleElement.classList.add("modal-title");
+    titleElement.innerText = capitalizeFirstLetter(pokemon);
 
     let contentElement1 = document.createElement("p");
+    contentElement1.classList.add("modal-content");
     contentElement1.innerText = "Height: " + pokemon.height + "m";
 
     modal.appendChild(closeButtonElement);
@@ -157,6 +163,7 @@ let pokemonRepository = (function () {
     hideLoadingMessage: hideLoadingMessage,
     showModal: showModal,
     hideModal: hideModal,
+    capitalizeFirstLetter: capitalizeFirstLetter,
   };
 })();
 

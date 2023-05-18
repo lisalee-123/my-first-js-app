@@ -19,7 +19,7 @@
   height: 100px;
   background-color: var(--blue);
   padding: 0 30px;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .logo {
@@ -65,6 +65,7 @@ ul {
   width: 150px;
   height: 150px;
   margin: 25px;
+  cursor: pointer;
 }
 
 /* MODAL */
@@ -94,8 +95,10 @@ ul {
 }
 
 .modal {
+  text-align: center;
   margin: auto;
   display: flex;
+  align-items: center;
   flex-direction: column;
   box-sizing: border-box;
   background: #fff;
@@ -105,22 +108,37 @@ ul {
   max-width: 700px;
 }
 
-.modal h1,
-.modal p {
-  display: flex;
+.modal-title {
+  margin: 0;
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 28px;
 }
+
+.modal-content {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
 .image {
-  height: 180px;
-  width: 180px;
+  overflow: hidden;
+  object-fit: cover;
+  width: 7rem;
+  height: 7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .modal-close {
-  float: right;
-  text-align: right;
+  margin-left: auto;
+  font-size: 22px;
+  text-decoration: none;
+  cursor: pointer;
   border: 0;
   background: none;
   color: #777;
-  text-decoration: underline;
 }
 
 /*smartphone portrait modus*/
@@ -134,12 +152,26 @@ ul {
     margin-right: auto;
     margin-left: auto;
   }
+
+  .modal {
+    width: 80%;
+  }
+  .modal-title {
+    font-size: 24px;
+  }
 }
 
 /* Smartphone im Landscape-Modus */
 @media all and (min-width: 481px) and (max-width: 767px) {
   .pokemon-list {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .modal {
+    width: 65%;
+  }
+  .modal-title {
+    font-size: 24px;
   }
 }
 /* Tablet im Portrait-Modus */
