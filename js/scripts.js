@@ -107,36 +107,48 @@ let pokemonRepository = (function () {
       button.addEventListener("click", function () {
         showDetails(pokemon);
       });
-      button.classList.add("button");
+      button.setAttribute("data-toggle", "modal");
+      button.setAttribute("data-target", "modal");
 
       button.appendChild(image);
       button.appendChild(nameElement);
     });
 
     listItem.appendChild(button);
+    listItem.classList.add("pokemonList_item");
+
     ul.appendChild(listItem);
   }
 
   function showModal(pokemon) {
     let modalBody = $(".modal-body");
     let modalTitle = $(".modal-title");
-    let modalHeader = $("modal-header");
+    let modalHeader = $(".modal-header");
 
-    modalTitle.empty(); //instead of modalContainer.innerHTML = " ";
+    modalTitle.empty();
     modalBody.empty();
-    //MODAL CONTENT
-    let nameELement = $("<h1>" + pokemon.name + "</h1>"); //creating element in modal content
-    let imageElement = $('<img class="modal-img" style="wisth:50%"');
-    imageElement.attr("src", pokemon.imageUrl);
-    let heightElement = $("<p>" + "height: " + pokemon.height + "</p>");
-    let weightElement = $("<p>" + "weight: " + pokemon.weight + "</p");
-    let typesElement = $("<p>" + "types: " + pokemon.types + "</p>");
+
+    // MODAL CONTENT
+    let nameElement = $("<h1>" + pokemon.name + "</h1>").addClass(
+      "modal-title"
+    );
+    let imageElement = $("<img>")
+      .addClass("modal-img")
+      .attr("src", pokemon.imageUrl);
+    let heightElement = $("<p>" + "Height: " + pokemon.height + "</p>");
+    let weightElement = $("<p>" + "Weight: " + pokemon.weight + "</p>");
+    let typesElement = $("<p>" + "Types: " + pokemon.types + "</p>");
 
     modalTitle.append(nameElement);
-    modalBody.append(imageElement);
-    modalBody.append(heightElement);
-    modalBody.append(weightElement);
-    modalBody.append(typesElement);
+    modalBody.append(imageElement, heightElement, weightElement, typesElement);
+
+    $(".modal-body").append(
+      nameElement,
+      imageElement,
+      heightElement,
+      weightElement,
+      typesElement
+    );
   }
 
   function hideModal() {
