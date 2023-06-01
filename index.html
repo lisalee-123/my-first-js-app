@@ -22,24 +22,43 @@
   </head>
   <body>
     <header>
-      <div class="navbar">
-        <img class="logo" src="assets/logo.svg" alt="Logo" />
-        <img class="logo_2" src="assets/favicon.svg" alt="Second Logo" />
-      </div>
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <a class="" href="#">Pokémon Directory </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto"></ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input
+              class="form-control mr-sm-2"
+              type="search"
+              placeholder="Search Pokémon"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </nav>
     </header>
-    <main>
-      <ul class="pokemon-list"></ul>
+    <main class="container">
+      <div class="row">
+        <ul class="pokemon-list list-group"></ul>
+      </div>
     </main>
 
     <div id="modal-container"></div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-toggle="modal"
-      data-target="#exampleModal"
-    >
-      Launch Modal
-    </button>
 
     <div
       class="modal fade"
@@ -60,6 +79,16 @@
               aria-label="Close"
             >
               <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
             </button>
           </div>
         </div>
