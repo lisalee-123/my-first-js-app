@@ -11,7 +11,7 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="/dist/styles-minified.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -41,11 +41,16 @@
           <form class="form-inline my-2 my-lg-0">
             <input
               class="form-control mr-sm-2"
+              id="searchInput"
               type="search"
-              placeholder="Search Pokémon"
+              placeholder="Search ID or name"
               aria-label="Search Pokémon"
             />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            <button
+              class="btn btn-outline-success"
+              id="searchButton"
+              type="button"
+            >
               Search
             </button>
           </form>
@@ -109,8 +114,8 @@
       integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
       crossorigin="anonymous"
     ></script>
-    <script src="js/promise-polyfill.js"></script>
-    <script src="js/fetch-polyfill.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="/promise-polyfill.js"></script>
+    <script src="/fetch-polyfill.js"></script>
+    <script src="/dist/scripts-minified.js"></script>
   </body>
 </html>

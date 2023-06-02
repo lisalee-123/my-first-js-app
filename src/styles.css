@@ -1,8 +1,6 @@
 :root {
-  --yellow: #ffcb05;
-  --blue: #2a75bb;
-  --darkYellow: #c7a008;
-  --darkBlue: #3c5aa6;
+  --primaryColor: #2a75bb;
+  --secondaryColor: white;
 }
 * {
   font-family: "Montserrat", sans-serif;
@@ -10,29 +8,35 @@
   box-sizing: border-box;
   margin: 0;
 }
-
+.notvisible {
+  display: none;
+}
+.isvisible {
+  display: block;
+}
 .navbar,
 .navbar a {
-  background-color: var(--blue);
-  color: white;
+  background-color: var(--primaryColor);
+  color: var(--secondaryColor);
   font-size: 20px;
 }
 
 .navbar-toggler {
-  background: white;
+  background: var(--secondaryColor);
 }
 .btn-outline-success {
-  color: white;
-  border-color: white;
+  color: var(--secondaryColor);
+  border-color: var(--secondaryColor);
 }
 .container {
   list-style: none;
   display: grid;
+  grid-auto-flow: row;
   width: fit-content;
   margin: 150px auto;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   align-content: center;
   align-items: center;
   gap: 20px 20px;
@@ -47,11 +51,11 @@
 .btn-primary {
   font-size: 20px;
   border-style: none;
-  color: var(--blue);
+  color: var(--primaryColor);
   width: 200px;
   height: 200px;
   cursor: pointer;
-  background-color: white;
+  background-color: var(--secondaryColor);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 

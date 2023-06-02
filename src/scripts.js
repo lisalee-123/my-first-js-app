@@ -1,14 +1,11 @@
 let pokemonRepository = (function () {
-  //IIFE (all variables are private)
-  let pokemonList = [];
+  //IIFE (private scope)
+  let pokemonList = []; //empty array
   let apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
-  let currentPage = 1;
-  let itemsPerPage = 20;
 
-  function getItems() {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return pokemonList.slice(startIndex, endIndex);
+  //function to get all the pokemon in the repository
+  function getAll() {
+    return pokemonList;
   }
 
   function showLoadingMessage() {
@@ -39,6 +36,7 @@ let pokemonRepository = (function () {
   }
 
   function loadList() {
+    //load the pokemons from the api
     showLoadingMessage();
     //fetch-function, apiURL is the promise, the jsonlist is the response
     return fetch(apiUrl)
@@ -47,7 +45,7 @@ let pokemonRepository = (function () {
       })
       .then(function (json) {
         hideLoadingMessage();
-        //convert the json list into our objects
+        //convert the json list into pokemon objects
         json.results.forEach(function (item) {
           let pokemon = {
             name: item.name,
@@ -63,6 +61,7 @@ let pokemonRepository = (function () {
   }
 
   function loadDetails(item) {
+    //to load additional details from the api
     showLoadingMessage();
     let url = item.detailsUrl;
     return fetch(url)
@@ -71,7 +70,7 @@ let pokemonRepository = (function () {
       })
       .then(function (details) {
         hideLoadingMessage();
-        // Now we add the details to the item
+        // adding details to the item
         item.imageUrl = details.sprites.front_default;
         item.height = details.height;
         item.types = details.types;
@@ -90,15 +89,18 @@ let pokemonRepository = (function () {
     });
   }
 
+  //function to have the Names with a capitalized first letter
   function capitalizeFirstLetter(pokemon) {
     return pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
   }
 
+  //function to actually add the pokemon visually to the UI
   function addListItem(pokemon) {
     let mainElement = document.querySelector("main");
     let ul = document.querySelector("ul");
     let listItem = document.createElement("li");
     listItem.classList.add("list-group-item");
+    listItem.classList.add(pokemon.name);
     let div = document.createElement("div");
     div.classList.add("row");
     let button = document.createElement("button");
@@ -108,7 +110,6 @@ let pokemonRepository = (function () {
     button.setAttribute("data-toggle", "modal");
     button.setAttribute("data-target", "#exampleModal");
 
-    // Create a closure for the showDetails function call
     button.addEventListener("click", function () {
       showDetails(pokemon);
     });
@@ -157,8 +158,24 @@ let pokemonRepository = (function () {
     $("#modal").modal("show");
   }
 
+  function sortByName() {
+    pokemonList.sort(function (a, b) {
+      // Convert the pokemon names to lowercase for case-insensitive sorting
+      let nameA = a.name.toLowerCase();
+      let nameB = b.name.toLowerCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
   return {
-    getItems: getItems,
+    getAll: getAll,
     add: add,
     addListItem: addListItem,
     showDetails: showDetails,
@@ -168,15 +185,33 @@ let pokemonRepository = (function () {
     hideLoadingMessage: hideLoadingMessage,
     showModal: showModal,
     capitalizeFirstLetter: capitalizeFirstLetter,
+    sortByName: sortByName,
   };
 })();
 
-console.log(pokemonRepository.getItems());
+console.log(pokemonRepository.getAll());
 
 //FOREACH() LOOP
 
 pokemonRepository.loadList().then(function () {
-  pokemonRepository.getItems().forEach(function (pokemon) {
+  pokemonRepository.sortByName();
+  pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
+  });
+});
+
+document.getElementById("searchButton").addEventListener("click", function () {
+  let searchInput = document.querySelector("#searchInput");
+  let searchValue = searchInput.value.toLowerCase();
+  let listItems = document.querySelectorAll(".list-group-item");
+
+  listItems.forEach(function (item) {
+    let pokemonName = item.classList[1]; // Assuming the pokemon name is the second class
+
+    if (pokemonName.includes(searchValue)) {
+      item.style.display = "block"; // Show the list item
+    } else {
+      item.style.display = "none"; // Hide the list item
+    }
   });
 });
