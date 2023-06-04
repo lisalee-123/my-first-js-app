@@ -216,8 +216,9 @@ document.getElementById("searchButton").addEventListener("click", function () {
 });
 
 document.getElementById("resetButton").addEventListener("click", function () {
-  pokemonRepository.sortByName();
+  window.location.reload();
+  /*pokemonRepository.sortByName();
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
-  });
+  });*/
 });
