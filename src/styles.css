@@ -24,11 +24,29 @@
 .navbar-toggler {
   background: var(--secondaryColor);
 }
-.btn-outline-success {
+.btn-outline-success,
+.btn {
   color: var(--secondaryColor);
   border-color: var(--secondaryColor);
 }
-.container {
+
+.list-group-item button:hover {
+  background-color: var(--primaryColor);
+}
+
+#searchButton,
+#resetButton {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#resetButton:hover {
+  background-color: var(--secondaryColor);
+  color: var(--primaryColor);
+  border-color: var(--primaryColor);
+}
+
+.pokemon-list {
   list-style: none;
   display: grid;
   grid-auto-flow: row;
@@ -66,7 +84,7 @@
 }
 
 @media all and (max-width: 526px) {
-  .container {
+  .pokemon-list {
     margin: 100px auto;
     grid-template-columns: 1fr;
     justify-items: center;
@@ -75,10 +93,17 @@
     align-items: center;
     gap: 10px;
   }
+
+  .form-control,
+  .mr-sm-2 {
+    margin-bottom: 10px;
+    margin-right: 200px;
+    width: 250px;
+  }
 }
 
 @media all and (min-width: 527px) {
-  .container {
+  .pokemon-list {
     margin: 100px auto;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
@@ -87,10 +112,16 @@
     align-items: center;
     gap: 10px;
   }
+  .form-control,
+  .mr-sm-2 {
+    margin-bottom: 10px;
+    margin-right: 200px;
+    width: 250px;
+  }
 }
 
 @media all and (min-width: 760px) {
-  .container {
+  .pokemon-list {
     margin: 100px auto;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
@@ -102,7 +133,7 @@
 }
 
 @media all and (min-width: 1024px) {
-  .container {
+  .pokemon-list {
     margin: 100px auto;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-items: center;

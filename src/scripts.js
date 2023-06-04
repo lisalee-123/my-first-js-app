@@ -97,7 +97,7 @@ let pokemonRepository = (function () {
   //function to actually add the pokemon visually to the UI
   function addListItem(pokemon) {
     let mainElement = document.querySelector("main");
-    let ul = document.querySelector("ul");
+    let ul = mainElement.querySelector("ul");
     let listItem = document.createElement("li");
     listItem.classList.add("list-group-item");
     listItem.classList.add(pokemon.name);
@@ -122,13 +122,12 @@ let pokemonRepository = (function () {
       let nameElement = document.createElement("p");
       nameElement.innerText = capitalizeFirstLetter(pokemon);
 
-      mainElement.appendChild(ul);
       div.appendChild(button);
       button.appendChild(imageElement);
       button.appendChild(nameElement);
       listItem.appendChild(button);
 
-      mainElement.appendChild(listItem);
+      ul.appendChild(listItem);
     });
   }
 
@@ -213,5 +212,12 @@ document.getElementById("searchButton").addEventListener("click", function () {
     } else {
       item.style.display = "none"; // Hide the list item
     }
+  });
+});
+
+document.getElementById("resetButton").addEventListener("click", function () {
+  pokemonRepository.sortByName();
+  pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
   });
 });
