@@ -3,13 +3,13 @@ let pokemonRepository = (function () {
   function t() {
     return e;
   }
-  function n() {
+  function o() {
     let e = document.createElement("p");
     (e.textContent = "Details loading..."),
       (e.id = "loading-message"),
       document.body.prepend(e);
   }
-  function o() {
+  function n() {
     let e = document.querySelector("p");
     document.body.removeChild(e);
   }
@@ -22,13 +22,13 @@ let pokemonRepository = (function () {
   }
   function i(e) {
     return (
-      n(),
+      o(),
       fetch(e.detailsUrl)
         .then(function (e) {
           return e.json();
         })
         .then(function (t) {
-          o(),
+          n(),
             (e.imageUrl = t.sprites.front_default),
             (e.height = t.height),
             (e.types = t.types),
@@ -36,7 +36,7 @@ let pokemonRepository = (function () {
             (e.weight = t.weight);
         })
         .catch(function (e) {
-          o(), console.error(e);
+          n(), console.error(e);
         })
     );
   }
@@ -50,16 +50,16 @@ let pokemonRepository = (function () {
   }
   function s(e) {
     let t = $(".modal-body"),
-      n = $(".modal-title");
-    $(".modal-header"), n.empty(), t.empty();
-    let o = $("<h1>")
+      o = $(".modal-title");
+    $(".modal-header"), o.empty(), t.empty();
+    let n = $("<h1>")
         .addClass("modal-title")
         .text(e.name.charAt(0).toUpperCase() + e.name.slice(1)),
       a = $("<img class='modal-img'>");
     a.attr("src", e.imageUrl);
     let i = $("<p>Height: " + e.height + "</p>"),
       l = $("<p>Weight: " + e.weight + "</p>");
-    n.append(o),
+    o.append(n),
       t.append(a),
       t.append(i),
       t.append(l),
@@ -69,19 +69,18 @@ let pokemonRepository = (function () {
     getAll: t,
     add: a,
     addListItem: function e(t) {
-      let n = document.querySelector("main"),
-        o = document.querySelector("ul"),
-        a = document.createElement("li");
-      a.classList.add("list-group-item"), a.classList.add(t.name);
-      let i = document.createElement("div");
-      i.classList.add("row");
-      let s = document.createElement("button");
-      s.classList.add("btn"),
-        s.classList.add("btn-primary"),
-        s.setAttribute("aria-label", "details"),
-        s.setAttribute("data-toggle", "modal"),
-        s.setAttribute("data-target", "#exampleModal"),
-        s.addEventListener("click", function () {
+      let o = document.querySelector("main").querySelector("ul"),
+        n = document.createElement("li");
+      n.classList.add("list-group-item"), n.classList.add(t.name);
+      let a = document.createElement("div");
+      a.classList.add("row");
+      let i = document.createElement("button");
+      i.classList.add("btn"),
+        i.classList.add("btn-primary"),
+        i.setAttribute("aria-label", "details"),
+        i.setAttribute("data-toggle", "modal"),
+        i.setAttribute("data-target", "#exampleModal"),
+        i.addEventListener("click", function () {
           l(t);
         }),
         pokemonRepository.loadDetails(t).then(function () {
@@ -89,43 +88,42 @@ let pokemonRepository = (function () {
           e.src = t.imageUrl;
           let l = document.createElement("p");
           (l.innerText = r(t)),
-            n.appendChild(o),
-            i.appendChild(s),
-            s.appendChild(e),
-            s.appendChild(l),
-            a.appendChild(s),
-            n.appendChild(a);
+            a.appendChild(i),
+            i.appendChild(e),
+            i.appendChild(l),
+            n.appendChild(i),
+            o.appendChild(n);
         });
     },
     showDetails: l,
     loadList: function e() {
       return (
-        n(),
+        o(),
         fetch("https://pokeapi.co/api/v2/pokemon/?limit=150")
           .then(function (e) {
             return e.json();
           })
           .then(function (e) {
-            o(),
+            n(),
               e.results.forEach(function (e) {
                 a({ name: e.name, detailsUrl: e.url });
               });
           })
           .catch(function (e) {
-            o(), console.error(e);
+            n(), console.error(e);
           })
       );
     },
     loadDetails: i,
-    showLoadingMessage: n,
-    hideLoadingMessage: o,
+    showLoadingMessage: o,
+    hideLoadingMessage: n,
     showModal: s,
     capitalizeFirstLetter: r,
     sortByName: function t() {
       e.sort(function (e, t) {
-        let n = e.name.toLowerCase(),
-          o = t.name.toLowerCase();
-        return n < o ? -1 : n > o ? 1 : 0;
+        let o = e.name.toLowerCase(),
+          n = t.name.toLowerCase();
+        return o < n ? -1 : o > n ? 1 : 0;
       });
     },
   };
@@ -146,4 +144,10 @@ console.log(pokemonRepository.getAll()),
           ? (t.style.display = "block")
           : (t.style.display = "none");
       });
-    });
+    }),
+  document.getElementById("resetButton").addEventListener("click", function () {
+    pokemonRepository.sortByName(),
+      pokemonRepository.getAll().forEach(function (e) {
+        pokemonRepository.addListItem(e);
+      });
+  });
